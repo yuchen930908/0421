@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 繪製波浪
         ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = 0.5;
         drawSmoothWave(currentWavePoints);
         
         // 保存當前波形作為下一幀的前一幀
