@@ -13,27 +13,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 設定基本參數，使用隨機值
     const verticalCenter = window.innerHeight * (0.3 + Math.random() * 0.4); // 隨機位置在畫面30%-70%之間
-    const baseAmplitude = 150 + Math.random() * 60; // 150-210之間的隨機振幅
+    const baseAmplitude = (97.5 + Math.random() * 39); // 增加 30%（從 75-105 增加到 97.5-136.5）
     
     // 波形參數 - 使用隨機值初始化
     const waveParams = {
-        frequency: 0.002 + Math.random() * 0.003, // 隨機頻率
+        frequency: (0.0013 + Math.random() * 0.00195), // 增加 30%
         phase: Math.random() * Math.PI * 2, // 隨機相位
         speed: 0.01 + Math.random() * 0.02, // 隨機速度
-        horizontalSpeed: 1 + Math.random() * 0.5 // 水平移動速度 (每幀移動的像素數)
+        horizontalSpeed: 1 + Math.random() * 0.5, // 水平移動速度 (每幀移動的像素數)
+        floatSpeed: 0.0008 + Math.random() * 0.0004, // 飄浮速度
+        floatAmplitude: 30 + Math.random() * 20 // 飄浮幅度
     };
     
     // 用於創建自然變化的多個波
     const subWaves = [
         { 
-            frequency: waveParams.frequency * (0.5 + Math.random() * 0.2), 
-            amplitude: baseAmplitude * 0.3, 
+            frequency: waveParams.frequency * (0.325 + Math.random() * 0.13), // 增加 30%
+            amplitude: baseAmplitude * 0.195, // 增加 30%
             speed: waveParams.speed * 0.7,
             phase: Math.random() * Math.PI * 2
         },
         { 
-            frequency: waveParams.frequency * (1.5 + Math.random() * 0.3), 
-            amplitude: baseAmplitude * 0.15, 
+            frequency: waveParams.frequency * (0.975 + Math.random() * 0.195), // 增加 30%
+            amplitude: baseAmplitude * 0.0975, // 增加 30%
             speed: waveParams.speed * 1.3,
             phase: Math.random() * Math.PI * 2
         }
@@ -99,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 增加水平偏移量，實現從右到左的移動
         horizontalOffset += waveParams.horizontalSpeed;
         
-        // 計算垂直位置的緩慢自然變化
-        const verticalShift = Math.sin(time * 0.02) * baseAmplitude * 0.05;
+        // 計算垂直位置的緩慢自然變化 - 使用新的飄浮參數
+        const verticalShift = Math.sin(time * waveParams.floatSpeed) * waveParams.floatAmplitude;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
